@@ -1,53 +1,43 @@
+pragma solidity ^0.6.6;
 
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.6.10;
-
-import "../oracleClient/IOracleClient.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract MockChainlinkAPICall is IOracleClient, ChainlinkClient, Ownable {
-    uint private _price = 10**18;
-    uint private _decs = 18;
-
-    event Tweet(string content);
-    event TweetId(uint256 id);
-    address public governance;
-    address public link;
-
-    bool public governanceSet;
-
-    constructor(address _link) public {
-        //setPublicChainlinkToken();
-        link = _link;
+contract MockChainlinkAPICall is ChainlinkClient {
+    event OracleCall(string content);
+    uint256 public volume;
+    address private oracle;
+    bytes32 private jobId;
+    uint256 private fee;
+    
+    /**
+     * Network: Kovan
+     * Oracle: Chainlink - 0x2f90A6D021db21e1B2A077c5a37B3C7E75D15b7e
+     * Job ID: Chainlink - 29fa9aa13bf1468788b7cc4a500a45b8
+     * Fee: 0.1 LINK
+     */
+    constructor(address linkToken) public {
+        setChainlinkToken(linkToken);
+        oracle = 0x2f90A6D021db21e1B2A077c5a37B3C7E75D15b7e;
+        jobId = "29fa9aa13bf1468788b7cc4a500a45b8";
+        fee = 0.1 * 10 ** 18; // 0.1 LINK
     }
-
-    function setGovernance(address _governance) external onlyOwner {
-        require(governanceSet == false, "Governance can only be set once!");
-        governance = _governance;
-        governanceSet = true;
+    
+    /**
+     * Create a Chainlink request to retrieve API response, find the target
+     * data, then multiply by 1000000000000000000 (to remove decimal places from data).
+     */
+    function requestVolumeData() public returns (bytes32 requestId) 
+    {
+        emit OracleCall("Oracle Called");
+        bytes32 requestId;
+        return requestId;
     }
-
-    function getPrice() external view override returns (uint, uint) {
-        return (_price, _decs);
-    }
-
-    function paymentTokenAddress() external view override returns (address) {
-        //return chainlinkTokenAddress();
-        return link;
-    }
-
-    function sendTweet(string memory content) external override onlyGovernance {
-        emit Tweet(content);
-    }
-
-    function returnTweetId(bytes32 _requestId, uint256 _tweetId) public recordChainlinkFulfillment(_requestId){
-        emit TweetId(_tweetId);
-    }
-
-    modifier onlyGovernance() {
-        require(msg.sender == governance, "Governance only");
-        _;
+    
+    /**
+     * Receive the response in the form of uint256
+     */ 
+    function fulfill(bytes32 _requestId, uint256 _volume) public recordChainlinkFulfillment(_requestId)
+    {
+        volume = _volume;
     }
 }

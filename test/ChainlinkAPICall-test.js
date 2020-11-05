@@ -1,15 +1,20 @@
 const { expect } = require("chai")
-// const { LinkToken } = require('@chainlink/contracts/truffle/v0.4/LinkToken')
 const { waffle } = require("hardhat")
-// const provider = waffle.provider
+// Not an end-to-end testing suite. 
+// Please check https://github.com/smartcontractkit/box/blob/master/test/MyContract_test.js
+// For a more robust implementation
+
 
 describe("ChainlinkAPICall", function () {
-  it("Should return the default volume of the ChainlinkAPICall contract", async function () {
-    // const link = await LinkToken.deploy()
-    // const ChainlinkAPICall = await ethers.getContractFactory("ChainlinkAPICall")
-    // const chainlinkAPICall = await ChainlinkAPICall.deploy()
+  let mockChainlinkAPICall, link
+  beforeEach(async () => {
+    let MockChainlinkAPICall = await ethers.getContractFactory("MockChainlinkAPICall")
+    let MockERC20 = await ethers.getContractFactory("MockERC20")
+    link = await MockERC20.deploy()
+    mockChainlinkAPICall = await MockChainlinkAPICall.deploy(link.address)
+  })
 
-    // await chainlinkAPICall.deployed()
-    // expect(await chainlinkAPICall.volume()).to.equal(0)
+  it("Should be able to successfully request data", async function () {
+    await mockChainlinkAPICall.requestVolumeData()
   })
 })
