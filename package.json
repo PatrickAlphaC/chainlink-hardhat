@@ -12,6 +12,7 @@
     "@chainlink/contracts": "0.0.11",
     "@chainlink/test-helpers": "0.0.5",
     "@openzeppelin/contracts": "^3.2.0",
-    "@openzeppelin/test-helpers": "^0.5.9"
+    "@openzeppelin/test-helpers": "^0.5.9",
+    "hardhat-deploy": "^0.7.0-beta.28"
   }
 }

@@ -20,6 +20,9 @@ module.exports = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
+      forking: {
+        url: process.env.ALCHEMY_MAINNET_RPC_URL
+      }
     },
     kovan: {
       url: process.env.KOVAN_RPC_URL,
