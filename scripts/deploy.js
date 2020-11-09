@@ -2,21 +2,6 @@
 // const ethers = hre.ethers
 
 async function main() {
-    // const [deployer] = await ethers.getSigners()
-    // console.log(
-    //     "Deploying the contracts with the account:",
-    //     await deployer.getAddress()
-    // )
-
-    // // console.log("Account balance:", (await deployer.getBalance()).toString())
-
-    // // const Token = await ethers.getContractFactory("Token")
-    // // const token = await Token.deploy()
-    // // await token.deployed()
-
-    // // console.log("Token address:", token.address)
-
-
     console.log("Getting artifacts together")
     const PriceConsumerV3 = await ethers.getContractFactory("PriceConsumerV3")
     console.log("Deploying")
