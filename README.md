@@ -6,8 +6,10 @@ Set your `ALCHEMY_MAINNET_RPC_URL` [environment variable.](https://www.twilio.co
 
 ```
 export MNEMONIC='cat dog frog....'
-export RINKEBY_RPC_URL='www.infura.io/asdfadsfafdadf'
+export ALCHEMY_MAINNET_RPC_URL='www.infura.io/asdfadsfafdadf'
 ```
+
+Then run
 
 1. `git clone https://github.com/PatrickAlphaC/chainlink-hardhat`
 2. `cd chainlink-hardhat`
