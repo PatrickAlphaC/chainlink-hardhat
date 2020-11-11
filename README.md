@@ -2,7 +2,12 @@
 
 # QuickStart
 
-Set your `ALCHEMY_MAINNET_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). You can get one for free at [Alchemy's site.](https://alchemyapi.io/)
+Set your `ALCHEMY_MAINNET_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). You can get one for free at [Alchemy's site.](https://alchemyapi.io/). You'll also need your `MNEMONIC` which is your 12 word seed phrase from you wallet, ie metamask. 
+
+```
+export MNEMONIC='cat dog frog....'
+export RINKEBY_RPC_URL='www.infura.io/asdfadsfafdadf'
+```
 
 1. `git clone https://github.com/PatrickAlphaC/chainlink-hardhat`
 2. `cd chainlink-hardhat`
