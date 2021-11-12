@@ -1,3 +1,5 @@
+Please use the [Chainlink Hardhat Starter Kit](https://github.com/smartcontractkit/hardhat-starter-kit)
+
 # Chainlink hardhat implementation
 
 # QuickStart
